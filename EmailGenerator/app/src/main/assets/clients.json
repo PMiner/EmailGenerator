@@ -1,0 +1,58 @@
+{
+  "clients": [
+    {
+      "name": "Grilled Deviled Chickens Under a Brick",
+      "emails" : [ "4 baby chickens (poussins) or cornish hens (about 1 1/4 pounds each), or 4 chicken breast halves", "3 lemons, plus wedges for garnish", "4 cloves garlic, peeled and smashed", "1 tablespoon crushed red-pepper flakes, or to taste", "1 tablespoon finely chopped fresh thyme", "1 tablespoon finely chopped fresh rosemary", "1/2 cup olive oil", "Salt, to taste" ]
+    },
+
+    {
+      "name": "Stir-Fried Rice with Chinese Sausage",
+      "emails" : [ "2 or 3 links of chineses sausage, cut into 1/4 inch slices", "4 cloves garlic, minced", "4 cups cold cooked rice", "2 tablespoons light soy sauce", "1/2 teaspoon salt", "1/4 teaspoon sugar", "1/4 teaspoon white pepper", "To garnish:", "Finely chopped green onion or cilantro" ]
+    },
+
+    {
+      "name": "Five-Spice Chicken Wings Recipe",
+      "emails" : [ "40 chicken wing pieces, or 20 whole chicken wings", "2 tablespoons chinese five-spice powder", "1 tablespoon cayenne pepper", "Kosher salt and freshly ground black pepper", "1/3 to 1/2 cup chopped fresh cilantro leaves", "1/4 cup light or regular sour cream", "1/4 cup mayonnaise", "1/4 cup plain yogurt", "Juice 1/2 lemon (or why not try lime?)" ]
+    },
+
+    {
+      "name": "Chinese Pork Ribs",
+      "emails" : [ "1.0 tbsp clear honey", "1.0 tbsp vinegar (you can use cider, malt or wine)", "100.0ml hoisin sauce", "2.0 tbsp soy sauce", "12 meaty pork ribs", "1.0 tsp chinese five-spice powder" ]
+    },
+
+    {
+      "name": "Korean Rice Cakes (Dok Boki)",
+      "emails" : [ "6 to 8 fresh long rice cake sticks, or 20 smaller rice cake sticks", "For the sauce:", "3 tablespoons korean chili pepper paste", "3 to 4 tablespoons light soy sauce, depending on saltiness", "1 teaspoon sugar", "1 teaspoon rice vinegar", "Roasted sesame seeds to garnish" ]
+
+    },
+
+    {
+      "name": "Dump Cake",
+      "emails" : [ "1 can (21 oz.) cherry pie filling", "1 can (15 oz.) crushed pineapple", "1 box (about 18 oz.) yellow or white cake mix", "1 stick margarine", "½ sticks butter", "Whipped cream" ]
+    },
+
+    {
+      "name": "Sugar Cookies",
+      "emails" : [ "2 1/2 cups self-rising white lily or cake flour", "2 sticks (1 cup) unsalted butter, softened", "1 1/2 cups sugar", "1 large egg, lightly beaten", "1 teaspoon vanilla" ]
+    },
+
+    {
+      "name": "Pretzel Dumplings With Creamed Chanterelle Mushrooms",
+      "emails" : [ "200-250 g pretzels", "150 ml hot milk", "1 tbsp butter", "30 g bacon, finely chopped", "1 x onion, finely chopped", "2 x eggs", "Fresh parsley, chopped", "Salt", "Freshly ground black pepp", "Nutmeg", "1 tbsp butter for creamed chanterelle mushroom sauce", "1-2 x shallots", "250 g chanterelle mushrooms", "100-200 ml vegetable broth", "100 ml heavy cream", "2 tbsp sherry", "Salt and freshly ground black pepp", "Fresh chives, chopped for decoration" ]
+    },
+
+    {
+      "name": "Creamed Candy Corn",
+      "emails" :[ "1 cup cream or half and half", "2 tablespoons butter", "2 tablespoons instant vanilla pudding mix", "1 bag (11 ounces) candy corn" ]
+    },
+
+    {
+      "name": "Buttermilk Creams with Strawberries",
+      "emails" : [ "1 1/4 teaspoons unflavored gelatin (from a 1/4-ounce envelope)", "3/4 cup sugar", "1 cup low-fat buttermilk", "1 1/2 cups heavy cream", "1 pound strawberries, hulled and quartered", "1 teaspoon fresh lemon juice" ]
+    },
+    {
+      "name": "cartamundi!",
+      "emails" : ["harry@cartamundi.com", "cartamundi@cartamundi.com", "google@cartamundi.com"]
+    }
+  ]
+}
