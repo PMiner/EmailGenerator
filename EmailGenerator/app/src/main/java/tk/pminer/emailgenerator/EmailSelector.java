@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 public class EmailSelector extends AppCompatActivity
 {
-    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class EmailSelector extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         String item = this.getIntent().getExtras().getString("item");
-        mListView = (ListView) findViewById(R.id.email_list_view);
+        ListView mListView = (ListView) findViewById(R.id.email_list_view);
         final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile("clients.json", item, this);
         String[] listItems = new String[emailList.size()];
 
