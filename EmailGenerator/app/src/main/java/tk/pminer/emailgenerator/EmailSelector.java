@@ -24,16 +24,16 @@ public class EmailSelector extends AppCompatActivity
 
         String item = this.getIntent().getExtras().getString("item");
         mListView = (ListView) findViewById(R.id.email_list_view);
-        final ArrayList<EmailList> emailList  = EmailList.getClientsFromFile("clients.json", item, this);
+        final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile("clients.json", item, this);
         String[] listItems = new String[emailList.size()];
-        EmailList.getArrayFromFile("clients.json", item, this);
+
         for(int i = 0; i < emailList.size(); i++)
         {
-            EmailList client = emailList.get(i);
-            listItems[i] = client.name;
+            EmailList email = emailList.get(i);
+            listItems[i] = email.email;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, EmailList.getArrayFromFile("clients.json", item, this));
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
         mListView.setAdapter(adapter);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.email_create);
