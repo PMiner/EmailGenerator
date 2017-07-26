@@ -33,21 +33,22 @@ public class EmailSelector extends AppCompatActivity
             listItems[i] = email.email;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listItems);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.select_dialog_multichoice, listItems);
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         mListView.setAdapter(adapter);
-
+        for (int i = 0; i < emailList.size(); i++) {
+            mListView.setItemChecked(i, true);
+        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.email_create);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO CREATE EMAIL
-                Snackbar.make(view, "TODO: Create email", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "TODO: Create email", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Action", null).show();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(item);
     }
-
 }
