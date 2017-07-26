@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context="tk.pminer.emailgenerator.EmailSelector">
 
+    <TextView
+        android:id="@+id/email_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|center_horizontal"
+        android:layout_weight="1"
+        android:text="@string/list_empty"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="275dp" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/email_create"
         android:layout_width="wrap_content"

@@ -4,4 +4,6 @@
     <string name="title_activity_email_selector">EmailSelector</string>
     <string name="replacestring">ReplaceString</string>
     <string name="send_button">Send</string>
+    <string name="list_empty">Add an item to the List to continue</string>
+    <string name="add_client">Add Client</string>
 </resources>

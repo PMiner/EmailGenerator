@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,14 +28,16 @@ public class EmailSelector extends AppCompatActivity
         ListView mListView = (ListView) findViewById(R.id.email_list_view);
         final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile("clients.json", item, this);
         String[] listItems = new String[emailList.size()];
-
+        View hint = findViewById(R.id.email_hint);
+        if(emailList.size() == 0) { hint.setVisibility(View.VISIBLE); }
+        else { hint.setVisibility(View.GONE); }
         for(int i = 0; i < emailList.size(); i++)
         {
             EmailList email = emailList.get(i);
             listItems[i] = email.email;
         }
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.select_dialog_multichoice, listItems);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.select_dialog_multichoice, listItems);
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         mListView.setAdapter(adapter);
         for (int i = 0; i < emailList.size(); i++) {
@@ -51,13 +52,16 @@ public class EmailSelector extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getActionBar() != null)
+        {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         setTitle(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_email_client, menu);
+        getMenuInflater().inflate(R.menu.menu_email_selector, menu);
         return true;
     }
 

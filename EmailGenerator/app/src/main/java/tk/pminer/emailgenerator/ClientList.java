@@ -11,11 +11,12 @@ import java.util.ArrayList;
 
 /**
  * Created by PMiner on 20/7/2017.
+ * EmailGenerator
  */
 
-public class ClientList {
+class ClientList {
     public String name;
-    public static ArrayList<ClientList> getClientsFromFile(String filename, Context context)
+    static ArrayList<ClientList> getClientsFromFile(String filename, Context context)
     {
         final ArrayList<ClientList> clientList = new ArrayList<>();
         try
@@ -36,8 +37,7 @@ public class ClientList {
         return clientList;
     }
     private static String loadJsonFromAsset(String filename, Context context) {
-        String json = null;
-
+        String json;
         try {
             InputStream is = context.getAssets().open(filename);
             int size = is.available();
