@@ -56,11 +56,12 @@ public class ClientSelector extends AppCompatActivity
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.simple_list_item_1, listItems);
         mListView.setAdapter(adapter);
         newContext = this;
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.client_edit);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.client_edit);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO ADD CLIENT
+                fab.hide();
                 mOptionsMenu.findItem(R.id.client_add).setVisible(true);
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(newContext, android.R.layout.select_dialog_multichoice, list);
                 mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
