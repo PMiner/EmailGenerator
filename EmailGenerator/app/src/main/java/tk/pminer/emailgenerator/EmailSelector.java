@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -61,11 +62,26 @@ public class EmailSelector extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         //TODO SEND EMAIL
-        Snackbar.make(findViewById(R.id.email_list_view), "TODO: Send email", Snackbar.LENGTH_SHORT)
-                .setAction("Action", null)
-                .show();
+        switch(item.getItemId())
+        {
+            case R.id.email_send:
+                Snackbar.make(findViewById(R.id.email_list_view), "TODO: Send email", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null)
+                        .show();
+                break;
+            case R.id.email_list_view:
+                Snackbar.make(findViewById(R.id.), "TODO: GO BACK", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null)
+                        .show();
+                break;
+            default:
+                Toast.makeText(this, Integer.toString(item.getItemId())+", "+Integer.toString(R.id.email_list_view), Toast.LENGTH_SHORT).show();
+                break;
+        }
+
         return true;
     }
 }
