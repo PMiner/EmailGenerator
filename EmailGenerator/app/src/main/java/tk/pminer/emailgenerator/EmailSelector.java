@@ -47,7 +47,7 @@ public class EmailSelector extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //TODO CREATE EMAIL
-                Snackbar.make(view, "TODO: Create email", Snackbar.LENGTH_INDEFINITE)
+                Snackbar.make(view, "TODO: Create email", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
@@ -72,13 +72,8 @@ public class EmailSelector extends AppCompatActivity
                         .setAction("Action", null)
                         .show();
                 break;
-            case R.id.email_list_view:
-                Snackbar.make(findViewById(R.id.), "TODO: GO BACK", Snackbar.LENGTH_SHORT)
-                        .setAction("Action", null)
-                        .show();
-                break;
             default:
-                Toast.makeText(this, Integer.toString(item.getItemId())+", "+Integer.toString(R.id.email_list_view), Toast.LENGTH_SHORT).show();
+                finish();
                 break;
         }
 

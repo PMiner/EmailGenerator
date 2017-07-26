@@ -46,7 +46,7 @@ public class ClientSelector extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 //TODO ADD CLIENT
-                Snackbar.make(view, "TODO: Add client", Snackbar.LENGTH_INDEFINITE)
+                Snackbar.make(view, "TODO: Add client", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
             }
         });
