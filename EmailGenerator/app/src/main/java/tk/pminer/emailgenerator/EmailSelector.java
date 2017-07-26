@@ -45,7 +45,7 @@ public class EmailSelector extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO CREATE EMAIL
+                //TODO CREATE EMAIL Soon
                 Snackbar.make(view, "TODO: Create email", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Action", null).show();
             }
