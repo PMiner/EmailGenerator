@@ -5,6 +5,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
@@ -50,5 +52,20 @@ public class EmailSelector extends AppCompatActivity
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setTitle(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_email_client, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //TODO SEND EMAIL
+        Snackbar.make(findViewById(R.id.email_list_view), "TODO: Send email", Snackbar.LENGTH_SHORT)
+                .setAction("Action", null)
+                .show();
+        return true;
     }
 }
