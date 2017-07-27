@@ -6,4 +6,19 @@
         android:icon="@drawable/ic_action_send"
         android:title="@string/send_button"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/email_done"
+        android:icon="@drawable/ic_action_done"
+        android:title="@string/client_done"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/email_delete"
+        android:icon="@drawable/ic_action_delete_forever"
+        android:title="@string/delete_email"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/email_add"
+        android:icon="@drawable/ic_action_person_add"
+        android:title="@string/add_email"
+        app:showAsAction="ifRoom" />
 </menu>

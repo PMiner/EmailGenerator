@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="tk.pminer.emailgenerator.ClientSelector">
     <item
+        android:id="@+id/client_done"
+        android:icon="@drawable/ic_action_done"
+        android:title="@string/client_done"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/client_delete"
+        android:icon="@drawable/ic_action_delete_forever"
+        android:title="@string/delete_client"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/client_add"
         android:icon="@drawable/ic_action_person_add"
         android:title="@string/add_client"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
 </menu>

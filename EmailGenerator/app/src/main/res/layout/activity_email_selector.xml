@@ -17,7 +17,7 @@
         tools:layout_editor_absoluteY="275dp" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/email_create"
+        android:id="@+id/email_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
