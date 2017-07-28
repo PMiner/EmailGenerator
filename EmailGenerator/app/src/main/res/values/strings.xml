@@ -1,15 +1,12 @@
 <resources>
     <string name="app_name">Shipping Email</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_email_selector">EmailSelector</string>
-    <string name="replacestring">ReplaceString</string>
     <string name="send_button">Send</string>
     <string name="list_empty">Add an item to the List to continue</string>
     <string name="add_client">Add Client</string>
     <string name="delete_client">Delete Client</string>
     <string name="client_done">Done</string>
     <string name="client_enter_hint">Client</string>
-    <string name="client_enter_text">Name</string>
     <string name="delete_email">Delete Email</string>
     <string name="add_email">Add Email</string>
     <string name="email_hint">Email</string>

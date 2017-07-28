@@ -1,7 +1,6 @@
 package tk.pminer.emailgenerator;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -24,14 +24,11 @@ public class EmailSelector extends AppCompatActivity
 {
     private Menu mOptionsMenu;
     private ListView mListView;
-    private Context newContext;
     private ArrayList<EmailList> list;
-    private LayoutInflater mInflater;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        newContext = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_email_selector);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -39,7 +36,7 @@ public class EmailSelector extends AppCompatActivity
 
         String item = this.getIntent().getExtras().getString("item");
         mListView = (ListView) findViewById(R.id.email_list_view);
-        final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile("clients.json", item, this);
+        final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile(item, this);
         String[] listItems = new String[emailList.size()];
         View hint = findViewById(R.id.email_hint);
         if(emailList.size() == 0) { hint.setVisibility(View.VISIBLE); }
@@ -95,8 +92,8 @@ public class EmailSelector extends AppCompatActivity
                 break;
             case R.id.email_add:
                 final AlertDialog.Builder emailEnterBuilder = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
-                mInflater = getLayoutInflater();
-                View mView = mInflater.inflate(R.layout.dialog_email_enter, null);
+                LayoutInflater mInflater = getLayoutInflater();
+                View mView = mInflater.inflate(R.layout.dialog_email_enter, (ViewGroup) mListView.getRootView());
                 final EditText dialogText = (EditText) mView.findViewById(R.id.email_enter);
                 emailEnterBuilder
                         .setView(mView)
@@ -157,7 +154,7 @@ public class EmailSelector extends AppCompatActivity
         }
     }
 
-    void EditModeOn()
+    private void EditModeOn()
     {
         for (int i = 0; i < list.size(); i++) {
             mListView.setItemChecked(i, false);
@@ -169,7 +166,7 @@ public class EmailSelector extends AppCompatActivity
         mOptionsMenu.findItem(R.id.email_done).setVisible(true);
         mOptionsMenu.findItem(R.id.email_send).setVisible(false);
     }
-    void EditModeOff()
+    private void EditModeOff()
     {
         for (int i = 0; i < list.size(); i++) {
             mListView.setItemChecked(i, true);

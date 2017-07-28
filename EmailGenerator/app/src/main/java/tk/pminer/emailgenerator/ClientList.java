@@ -1,14 +1,11 @@
 package tk.pminer.emailgenerator;
 
 import android.content.Context;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -21,12 +18,12 @@ import java.util.ArrayList;
 
 class ClientList {
     public String name;
-    static ArrayList<ClientList> getClientsFromFile(String filename, Context context)
+    static ArrayList<ClientList> getClientsFromFile(Context context, InputStream is)
     {
         final ArrayList<ClientList> clientList = new ArrayList<>();
         try
         {
-            String jsonString = loadJsonFromAsset(filename, context);
+            String jsonString = loadJsonFromAsset(context);
             JSONObject json = new JSONObject(jsonString);
             JSONArray clients = json.getJSONArray("clients");
             for(int i = 0; i < clients.length(); i++){
@@ -41,47 +38,34 @@ class ClientList {
         }
         catch (NullPointerException e)
         {
-            e.printStackTrace();
             try {
-                FileOutputStream fos = new FileOutputStream(filename);
-                fos.close();
-                JSONArray jsonArray = new JSONArray();
-                jsonArray.put("clients");
-                JSONObject object = new JSONObject();
-                object.put("clients", (Object) jsonArray);
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(filename, Context.MODE_PRIVATE));
-
-                outputStreamWriter.write(jsonArray.toString());
+                int size = is.available();
+                byte[] buffer = new byte[size];
+                is.read(buffer);
+                is.close();
+                String json = new String(buffer, "UTF-8");
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("clients.json", Context.MODE_PRIVATE));
+                outputStreamWriter.write(json);
                 outputStreamWriter.close();
-            } catch (FileNotFoundException ex) {
-                ex.printStackTrace();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (JSONException e1) {
+            } catch (IOException e1) {
                 e1.printStackTrace();
             }
+            e.printStackTrace();
         }
         return clientList;
     }
-    private static String loadJsonFromAsset(String filename, Context context) {
+    private static String loadJsonFromAsset(Context context) {
         String json;
         try {
-            InputStream is = context.openFileInput(filename);
+            InputStream is = context.openFileInput("clients.json");
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
         }
-        catch (java.io.IOException ex) {
-            try {
-                FileOutputStream fos = new FileOutputStream(filename);
-                fos.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        catch (java.io.IOException ex)
+        {
             ex.printStackTrace();
             return null;
         }
