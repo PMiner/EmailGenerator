@@ -54,15 +54,14 @@ public class EmailSelector extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO CREATE EMAIL
                 EditModeOn();
             }
         });
-        if(getActionBar() != null)
+        if(getSupportActionBar() != null)
         {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(item);
         }
-        setTitle(item);
     }
 
     @Override
@@ -82,18 +81,25 @@ public class EmailSelector extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        //TODO SEND EMAIL
+
         switch(item.getItemId())
+
         {
+            //TODO SEND EMAIL
             case R.id.email_send:
+                final AlertDialog.Builder emailSendBuilder = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
+                LayoutInflater emailSendInflater = getLayoutInflater();
+                View emailSendView = emailSendInflater.inflate(R.layout.dialog_email_send, (ViewGroup) mListView.getRootView(), false);
                 Snackbar.make(findViewById(R.id.email_list_view), "TODO: Send email", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null)
                         .show();
                 break;
+
+            //TODO CREATE EMAIL
             case R.id.email_add:
                 final AlertDialog.Builder emailEnterBuilder = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
                 LayoutInflater mInflater = getLayoutInflater();
-                View mView = mInflater.inflate(R.layout.dialog_email_enter, (ViewGroup) mListView.getRootView());
+                View mView = mInflater.inflate(R.layout.dialog_email_enter, (ViewGroup) mListView.getRootView(), false);
                 final EditText dialogText = (EditText) mView.findViewById(R.id.email_enter);
                 emailEnterBuilder
                         .setView(mView)
@@ -114,6 +120,7 @@ public class EmailSelector extends AppCompatActivity
                         });
                 emailEnterBuilder.create().show();
                 break;
+            //TODO DELETE
             case R.id.email_delete:
                 AlertDialog.Builder emailDeleteBuilder = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
                 emailDeleteBuilder
@@ -122,8 +129,6 @@ public class EmailSelector extends AppCompatActivity
                         .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //TODO DELETE
-                                EditModeOff();
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

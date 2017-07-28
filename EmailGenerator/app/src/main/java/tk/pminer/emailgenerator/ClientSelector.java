@@ -108,7 +108,7 @@ public class ClientSelector extends AppCompatActivity
             case R.id.client_add:
                 final AlertDialog.Builder clientEnterBuilder = new AlertDialog.Builder(findViewById(R.id.client_list_view).getContext());
                 LayoutInflater mInflater = getLayoutInflater();
-                final View mView = mInflater.inflate(R.layout.dialog_client_enter, (ViewGroup) mListView.getRootView());
+                final View mView = mInflater.inflate(R.layout.dialog_client_enter, (ViewGroup) mListView.getRootView(), false);
                 final EditText dialogText = (EditText) mView.findViewById(R.id.client_enter);
                 clientEnterBuilder
                         .setView(mView)

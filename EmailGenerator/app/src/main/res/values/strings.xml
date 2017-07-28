@@ -10,4 +10,7 @@
     <string name="delete_email">Delete Email</string>
     <string name="add_email">Add Email</string>
     <string name="email_hint">Email</string>
+    <string name="die">Die#</string>
+    <string name="job">Job#</string>
+    <string name="po">P.O.#</string>
 </resources>
