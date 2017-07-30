@@ -2,17 +2,14 @@ package tk.pminer.emailgenerator;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,7 +22,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.net.URI;
 import java.util.ArrayList;
 
 public class EmailSelector extends AppCompatActivity
@@ -62,7 +58,7 @@ public class EmailSelector extends AppCompatActivity
         }
     }
 
-    void reloadList()
+    private void reloadList()
     {
         final ArrayList<EmailList> emailList = EmailList.getEmailsFromFile(add, this);
         String[] listItems = new String[emailList.size()];
@@ -101,7 +97,6 @@ public class EmailSelector extends AppCompatActivity
         switch(item.getItemId())
 
         {
-            //TODO SEND EMAIL
             case R.id.email_send:
                 mListView = (ListView) findViewById(R.id.email_list_view);
                 int length = mListView.getCheckedItemCount();
@@ -118,7 +113,7 @@ public class EmailSelector extends AppCompatActivity
                                     final EditText poText = (EditText) emailSendView.findViewById(R.id.po_enter);
                                     final EditText jobText = (EditText) emailSendView.findViewById(R.id.job_enter);
                                     final EditText dieText = (EditText) emailSendView.findViewById(R.id.die_enter);
-                                    SparseBooleanArray positions = mListView.getCheckedItemPositions();
+                                    final SparseBooleanArray positions = mListView.getCheckedItemPositions();
                                     emailSendBuilder
                                             .setView(emailSendView)
                                             .setTitle("Enter relevant info")
@@ -127,10 +122,26 @@ public class EmailSelector extends AppCompatActivity
                                                 public void onClick(DialogInterface dialog, int which) {
                                                     String text;
                                                     String subject;
-                                                    String[] addresses = new String[1];
+                                                    int count = 0;
+                                                    for(int i = 0; i < list.length; i++)
+                                                    {
+                                                        if(positions.get(i))
+                                                        {
+                                                            count++;
+                                                        }
+                                                    }
+                                                    String[] addresses = new String[count];
+                                                    count = 0;
                                                     text = "Your die is ready.";
                                                     subject = "Die";
-                                                    addresses[0] = "reggie@reggie.com";
+                                                    for(int i = 0; i < list.length; i++)
+                                                    {
+                                                        if(positions.get(i))
+                                                        {
+                                                            addresses[count] = mListView.getItemAtPosition(i).toString();
+                                                            count++;
+                                                        }
+                                                    }
                                                     if(!poText.getText().toString().matches(""))
                                                     {
                                                         text = text+ "\nP.O.# " + poText.getText().toString();
@@ -167,7 +178,7 @@ public class EmailSelector extends AppCompatActivity
                                     final EditText poText = (EditText) emailSendView.findViewById(R.id.po_enter);
                                     final EditText jobText = (EditText) emailSendView.findViewById(R.id.job_enter);
                                     final EditText dieText = (EditText) emailSendView.findViewById(R.id.die_enter);
-                                    SparseBooleanArray positions = mListView.getCheckedItemPositions();
+                                    final SparseBooleanArray positions = mListView.getCheckedItemPositions();
                                     emailSendBuilder
                                             .setView(emailSendView)
                                             .setTitle("Enter relevant info")
@@ -177,10 +188,26 @@ public class EmailSelector extends AppCompatActivity
                                                     String time = TimePickerFragment.time;
                                                     String text;
                                                     String subject;
-                                                    String[] addresses = new String[1];
+                                                    int count = 0;
+                                                    for(int i = 0; i < list.length; i++)
+                                                    {
+                                                        if(positions.get(i))
+                                                        {
+                                                            count++;
+                                                        }
+                                                    }
+                                                    String[] addresses = new String[count];
+                                                    count = 0;
                                                     text = "Your die will be ready at: " + time;
                                                     subject = "ETA";
-                                                    addresses[0] = "reggie@reggie.com";
+                                                    for(int i = 0; i < list.length; i++)
+                                                    {
+                                                        if(positions.get(i))
+                                                        {
+                                                            addresses[count] = mListView.getItemAtPosition(i).toString();
+                                                            count++;
+                                                        }
+                                                    }
                                                     if(!poText.getText().toString().matches(""))
                                                     {
                                                         text = text+ "\nP.O.# " + poText.getText().toString();
@@ -248,12 +275,11 @@ public class EmailSelector extends AppCompatActivity
                             .setMessage("Are you sure you want to permanently delete the selected emails?")
                             .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                                 @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (selectItem != -1) {
-                                        EmailJSONEdit.removeJSONObjFromFile(add, selectItem, newContext);
-                                        reloadList();
-                                        EditModeOn();
-                                    }
+                                public void onClick(DialogInterface dialog, int which)
+                                {
+                                    EmailJSONEdit.removeJSONObjFromFile(add, selectItem, newContext);
+                                    reloadList();
+                                    EditModeOn();
                                 }
                             })
                             .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -270,8 +296,8 @@ public class EmailSelector extends AppCompatActivity
                 }
                 break;
             case R.id.email_done:
-                EditModeOff();
                 reloadList();
+                EditModeOff();
                 break;
             default:
                 if(mOptionsMenu.findItem(R.id.email_add).isVisible())
@@ -287,7 +313,7 @@ public class EmailSelector extends AppCompatActivity
         return true;
     }
 
-    public void sendEmail(String[] addresses, String subject, String text)
+    private void sendEmail(String[] addresses, String subject, String text)
     {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:"));

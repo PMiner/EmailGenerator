@@ -26,7 +26,7 @@ public class TimePickerFragment extends DialogFragment implements OnTimeSetListe
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
 
-        return new TimePickerDialog(getActivity(), this, hour, minute, false);
+        return new TimePickerDialog(getActivity(), this, hour, minute, is24HourFormat(getActivity()));
     }
 
     @Override
