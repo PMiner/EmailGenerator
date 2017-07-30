@@ -1,6 +1,8 @@
 package tk.pminer.emailgenerator;
 
 import android.app.AlertDialog;
+import android.app.DialogFragment;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,6 +12,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -99,7 +103,9 @@ public class EmailSelector extends AppCompatActivity
         {
             //TODO SEND EMAIL
             case R.id.email_send:
-                if(mListView.getCheckedItemCount() != 0) {
+                mListView = (ListView) findViewById(R.id.email_list_view);
+                int length = mListView.getCheckedItemCount();
+                if(length != 0) {
                     final AlertDialog.Builder readyOETA = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
                     readyOETA
                             .setMessage("Choose appropriate option")
@@ -112,14 +118,32 @@ public class EmailSelector extends AppCompatActivity
                                     final EditText poText = (EditText) emailSendView.findViewById(R.id.po_enter);
                                     final EditText jobText = (EditText) emailSendView.findViewById(R.id.job_enter);
                                     final EditText dieText = (EditText) emailSendView.findViewById(R.id.die_enter);
+                                    SparseBooleanArray positions = mListView.getCheckedItemPositions();
                                     emailSendBuilder
                                             .setView(emailSendView)
                                             .setTitle("Enter relevant info")
                                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                 @Override
                                                 public void onClick(DialogInterface dialog, int which) {
-                                                    String email;
-                                                    
+                                                    String text;
+                                                    String subject;
+                                                    String[] addresses = new String[1];
+                                                    text = "Your die is ready.";
+                                                    subject = "Die";
+                                                    addresses[0] = "reggie@reggie.com";
+                                                    if(!poText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nP.O.# " + poText.getText().toString();
+                                                    }
+                                                    if(!jobText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nJob# " + jobText.getText().toString();
+                                                    }
+                                                    if(!dieText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nDie# " + dieText.getText().toString();
+                                                    }
+                                                    sendEmail(addresses, subject, text);
                                                 }
                                             })
                                             .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
@@ -134,7 +158,52 @@ public class EmailSelector extends AppCompatActivity
                             .setNegativeButton("ETA", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which)
-                                {}
+                                {
+                                    DialogFragment newFragment = new TimePickerFragment();
+                                    newFragment.show(getFragmentManager(), "TimePicker");
+                                    final AlertDialog.Builder emailSendBuilder = new AlertDialog.Builder(findViewById(R.id.email_list_view).getContext());
+                                    LayoutInflater emailSendInflater = getLayoutInflater();
+                                    View emailSendView = emailSendInflater.inflate(R.layout.dialog_email_send, (ViewGroup) mListView.getRootView(), false);
+                                    final EditText poText = (EditText) emailSendView.findViewById(R.id.po_enter);
+                                    final EditText jobText = (EditText) emailSendView.findViewById(R.id.job_enter);
+                                    final EditText dieText = (EditText) emailSendView.findViewById(R.id.die_enter);
+                                    SparseBooleanArray positions = mListView.getCheckedItemPositions();
+                                    emailSendBuilder
+                                            .setView(emailSendView)
+                                            .setTitle("Enter relevant info")
+                                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    String time = TimePickerFragment.time;
+                                                    String text;
+                                                    String subject;
+                                                    String[] addresses = new String[1];
+                                                    text = "Your die will be ready at: " + time;
+                                                    subject = "ETA";
+                                                    addresses[0] = "reggie@reggie.com";
+                                                    if(!poText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nP.O.# " + poText.getText().toString();
+                                                    }
+                                                    if(!jobText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nJob# " + jobText.getText().toString();
+                                                    }
+                                                    if(!dieText.getText().toString().matches(""))
+                                                    {
+                                                        text = text+ "\nDie# " + dieText.getText().toString();
+                                                    }
+                                                    sendEmail(addresses, subject, text);
+                                                }
+                                            })
+                                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                }
+                                            });
+                                    emailSendBuilder.create().show();
+                                }
                             });
                     readyOETA.create().show();
                 }
@@ -202,6 +271,7 @@ public class EmailSelector extends AppCompatActivity
                 break;
             case R.id.email_done:
                 EditModeOff();
+                reloadList();
                 break;
             default:
                 if(mOptionsMenu.findItem(R.id.email_add).isVisible())
@@ -244,9 +314,6 @@ public class EmailSelector extends AppCompatActivity
 
     private void EditModeOn()
     {
-        for (int i = 0; i < list.length; i++) {
-            mListView.setItemChecked(i, false);
-        }
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.email_edit);
         fab.hide();
         mOptionsMenu.findItem(R.id.email_add).setVisible(true);
@@ -259,9 +326,6 @@ public class EmailSelector extends AppCompatActivity
     }
     private void EditModeOff()
     {
-        for (int i = 0; i < list.length; i++) {
-            mListView.setItemChecked(i, true);
-        }
         mOptionsMenu.findItem(R.id.email_add).setVisible(false);
         mOptionsMenu.findItem(R.id.email_done).setVisible(false);
         mOptionsMenu.findItem(R.id.email_delete).setVisible(false);
@@ -271,5 +335,9 @@ public class EmailSelector extends AppCompatActivity
         ArrayAdapter<String> adapter = new ArrayAdapter<>(newContext, android.R.layout.select_dialog_multichoice, list);
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         mListView.setAdapter(adapter);
+        mListView.clearChoices();
+        for (int i = 0; i < list.length; i++) {
+            mListView.setItemChecked(i, true);
+        }
     }
 }
