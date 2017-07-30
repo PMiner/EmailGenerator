@@ -23,7 +23,7 @@ class ClientList {
         final ArrayList<ClientList> clientList = new ArrayList<>();
         try
         {
-            String jsonString = loadJsonFromAsset(context);
+            String jsonString = loadJsonFromFile(context);
             JSONObject json = new JSONObject(jsonString);
             JSONArray clients = json.getJSONArray("clients");
             for(int i = 0; i < clients.length(); i++){
@@ -54,7 +54,7 @@ class ClientList {
         }
         return clientList;
     }
-    private static String loadJsonFromAsset(Context context) {
+    private static String loadJsonFromFile(Context context) {
         String json;
         try {
             InputStream is = context.openFileInput("clients.json");

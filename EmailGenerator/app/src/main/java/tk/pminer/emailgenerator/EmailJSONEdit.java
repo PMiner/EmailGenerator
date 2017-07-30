@@ -2,7 +2,6 @@ package tk.pminer.emailgenerator;
 
 import android.content.Context;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -15,12 +14,12 @@ import java.io.OutputStreamWriter;
  * EmailGenerator
  */
 
-class ClientJSONEdit
+class EmailJSONEdit
 {
     private static String json;
     private static JSONObject jsonObject;
 
-    static void addJSONObjToFile(String add, Context context)
+    static void addJSONObjToFile(String add, String name, Context context)
     {
 
         try
@@ -40,9 +39,8 @@ class ClientJSONEdit
         {
             jsonObject = new JSONObject(json);
             JSONObject tmpJson = new JSONObject();
-            tmpJson.put("name", add);
-            jsonObject.getJSONArray("clients").put(tmpJson);
-            jsonObject.put(add, new JSONArray());
+            tmpJson.put("email", add);
+            jsonObject.getJSONArray(name).put(tmpJson);
         }
         catch (JSONException | NullPointerException ex)
         {
@@ -58,7 +56,7 @@ class ClientJSONEdit
             e.printStackTrace();
         }
     }
-    static void removeJSONObjFromFile(String name, int Int, Context context)
+    static void removeJSONObjFromFile(String add, int Int, Context context)
     {
 
         try
@@ -69,6 +67,7 @@ class ClientJSONEdit
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
+
         }
         catch (IOException ex)
         {
@@ -77,8 +76,7 @@ class ClientJSONEdit
         try
         {
             jsonObject = new JSONObject(json);
-            jsonObject.getJSONArray("clients").remove(Int);
-            jsonObject.remove(name);
+            jsonObject.getJSONArray(add).remove(Int);
         }
         catch (JSONException ex)
         {

@@ -139,7 +139,7 @@ public class ClientSelector extends AppCompatActivity
                     clientDeleteBuilder
                             .setTitle("Warning")
                             .setMessage("Are you sure you want to permanently delete the selected clients?")
-                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                            .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     int myInt;
@@ -148,9 +148,10 @@ public class ClientSelector extends AppCompatActivity
                                     string = mListView.getItemAtPosition(myInt).toString();
                                     ClientJSONEdit.removeJSONObjFromFile(string, myInt, newContext);
                                     reloadList(newContext);
+                                    EditModeOn();
                                 }
                             })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
