@@ -362,7 +362,8 @@ public class EmailSelector extends AppCompatActivity
         mListView.setChoiceMode(AbsListView.CHOICE_MODE_MULTIPLE);
         mListView.setAdapter(adapter);
         mListView.clearChoices();
-        for (int i = 0; i < list.length; i++) {
+        for (int i = 0; i < list.length; i++)
+        {
             mListView.setItemChecked(i, true);
         }
     }

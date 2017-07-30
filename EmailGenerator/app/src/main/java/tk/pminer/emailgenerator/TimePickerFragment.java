@@ -5,7 +5,6 @@ import android.app.DialogFragment;
 import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -37,6 +36,5 @@ public class TimePickerFragment extends DialogFragment implements OnTimeSetListe
              newHour = newHour -12;
         }
         time = Integer.toString(newHour) + ":" + Integer.toString(minute);
-        Log.e("time", time);
     }
 }
