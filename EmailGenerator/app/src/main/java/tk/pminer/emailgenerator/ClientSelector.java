@@ -59,6 +59,8 @@ public class ClientSelector extends AppCompatActivity
                 EditModeOn();
             }
         });
+
+        setTitle("Client list");
     }
 
     private void reloadList(final Context context)

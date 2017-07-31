@@ -54,7 +54,7 @@ public class EmailSelector extends AppCompatActivity
         if(getSupportActionBar() != null)
         {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            setTitle(add);
+            setTitle(add + " email list");
         }
     }
 
@@ -133,7 +133,7 @@ public class EmailSelector extends AppCompatActivity
                                                     String[] addresses = new String[count];
                                                     count = 0;
                                                     text = "Your die is ready.";
-                                                    subject = "Die";
+                                                    subject = "Die Status";
                                                     for(int i = 0; i < list.length; i++)
                                                     {
                                                         if(positions.get(i))
@@ -199,7 +199,7 @@ public class EmailSelector extends AppCompatActivity
                                                     String[] addresses = new String[count];
                                                     count = 0;
                                                     text = "Your die will be ready at: " + time;
-                                                    subject = "ETA";
+                                                    subject = "Die ETA";
                                                     for(int i = 0; i < list.length; i++)
                                                     {
                                                         if(positions.get(i))
