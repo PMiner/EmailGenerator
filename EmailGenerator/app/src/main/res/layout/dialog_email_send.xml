@@ -13,7 +13,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:hint="@string/po"
-        android:inputType="textEmailAddress" />
+        android:inputType="textCapCharacters" />
 
     <EditText
         android:id="@+id/die_enter"
@@ -24,7 +24,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:hint="@string/die"
-        android:inputType="textEmailAddress" />
+        android:inputType="textCapCharacters" />
 
     <EditText
         android:id="@+id/job_enter"
@@ -35,5 +35,5 @@
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
         android:hint="@string/job"
-        android:inputType="textEmailAddress" />
+        android:inputType="textCapCharacters" />
 </LinearLayout>
